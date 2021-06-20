@@ -160,15 +160,23 @@ join = gpd.sjoin(geodata, pop, how="inner", op="intersects")
 print("join : pop")
 print(len(join), " : ", len(pop))
 
-#Group the joined layer by shopping center index
-join["name"] == "Tokyo Department Store" 
-seibu = join["name"] == "Seibu Shibuya Store" 
-azabu = join["name"] == 'National Azabu'
-
-print(seibu)
 # print(join)
 # print(join.columns)
+#print(join["PTN_2020"])
+
+#Group the joined layer by shopping center index
+tokyu = join.loc[join["name"] == "Tokyo Department Store"]
+azabu = join.loc[join["name"] == "Seibu Shibuya Store"]
+seibu = join.loc[join["name"] == 'National Azabu']
+
+
+
+
 # YOUR CODE HERE 11 to report how many people live within 1.5 km distance from each shopping center
+
+print(round(tokyu["PTN_2020"].sum()), "people live within 1.5 km from Tokyo Department Store")
+print(round(azabu["PTN_2020"].sum()), "people live within 1.5 km from Seibu Shibuya Store")
+print(round(seibu["PTN_2020"].sum()), "people live within 1.5 km from National Azabu")
 
 # **Reflections:**
 #     
@@ -177,5 +185,7 @@ print(seibu)
 # - What was difficult?
 
 # YOUR ANSWER HERE
+# I think that it was easier than previous one. However, it is difficult to figure out what is the real answer. Because, we take care of massive data (GIS data). Sometimes, I can't understand the output meaning. 
+
 
 # Well done!
