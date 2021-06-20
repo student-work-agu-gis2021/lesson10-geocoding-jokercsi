@@ -9,6 +9,7 @@
 # Import modules
 import geopandas as gpd
 import pandas as pd
+
 # Read the data (replace "None" with your own code)
 data = None
 # YOUR CODE HERE 1 to read the data
