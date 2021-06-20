@@ -84,7 +84,9 @@ print("Geocoded output is stored in this file:", out_fp)
 geodata['buffer']=None
 
 # YOUR CODE HERE 7 to set buffer column
+geodata = geodata.to_crs(epsg=32634)
 geodata['buffer'] = geodata['geometry'].buffer(distance=1500)
+
 #TEST CODE
 print(geodata.head())
 
@@ -121,10 +123,17 @@ addr_fp = r"data/500m_mesh_suikei_2018_shape_13/500m_mesh_2018_13.shp"
 pop = gpd.read_file(addr_fp)
 
 #show column
-print(pop.columns)
+#print(pop.columns)
 
 #Select only the useful columns : 'PTN_2020'  and 'geometry'
 pop = pop[["PTN_2020", "geometry"]]
+
+# check crs
+print(pop.crs)
+print(geodata.crs)
+print(geodata.crs == pop.crs)
+
+
 
 
 
@@ -141,7 +150,24 @@ print(pop.head(3))
 # Create a spatial join between grid layer and buffer layer. 
 # YOUR CDOE HERE 10 for spatial join
 
+# re-project
+geodata = geodata.to_crs(pop.crs)
+print("check crs: ", geodata.crs == pop.crs)
 
+
+#Make a spatial join between geodata and population 
+join = gpd.sjoin(geodata, pop, how="inner", op="intersects")
+print("join : pop")
+print(len(join), " : ", len(pop))
+
+#Group the joined layer by shopping center index
+join["name"] == "Tokyo Department Store" 
+seibu = join["name"] == "Seibu Shibuya Store" 
+azabu = join["name"] == 'National Azabu'
+
+print(seibu)
+# print(join)
+# print(join.columns)
 # YOUR CODE HERE 11 to report how many people live within 1.5 km distance from each shopping center
 
 # **Reflections:**
