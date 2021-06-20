@@ -52,7 +52,8 @@ print(geo.crs)
 
 
 # YOUR CODE HERE 4 to join the tables
-geodata = None
+geodata = geo.join(data)
+
 
 #TEST CODE
 # Check the join output
@@ -64,6 +65,10 @@ print(geodata.head())
 # Define output filepath
 out_fp = None
 # YOUR CODE HERE 5 to save the output
+outfp = r"data/shopping_centers.shp"
+
+# Save to Shapefile
+geodata.to_file(outfp)
 
 # TEST CODE
 # Print info about output file
