@@ -113,7 +113,21 @@ print(geodata.head())
 # 
 
 # YOUR CODE HERE 9
-# Read population grid data for 2018 into a variable `pop`. 
+
+# Addresses filpath
+addr_fp = r"data/500m_mesh_suikei_2018_shape_13/500m_mesh_2018_13.shp"
+
+# Read data
+pop = gpd.read_file(addr_fp)
+
+#show column
+print(pop.columns)
+
+#Select only the useful columns : 'PTN_2020'  and 'geometry'
+pop = pop[["PTN_2020", "geometry"]]
+
+
+
 
 #TEST CODE
 # Check your input data
