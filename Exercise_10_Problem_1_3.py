@@ -13,6 +13,10 @@ import pandas as pd
 # Read the data (replace "None" with your own code)
 data = None
 # YOUR CODE HERE 1 to read the data
+fp = r"data/shopping_centers.txt"
+
+data = pd.read_csv(fp, sep=';')
+
 
 #TEST COEE
 # Check your input data
