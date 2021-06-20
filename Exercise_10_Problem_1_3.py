@@ -81,9 +81,10 @@ print("Geocoded output is stored in this file:", out_fp)
  
 
 # YOUR CODE HERE 6 to create a new column
+geodata['buffer']=None
 
 # YOUR CODE HERE 7 to set buffer column
-
+geodata['buffer'] = geodata['geometry'].buffer(distance=1500)
 #TEST CODE
 print(geodata.head())
 
@@ -100,6 +101,7 @@ print(round(gpd.GeoSeries(geodata["buffer"]).area / 1000000))
 # - Replace the values in `geometry` column with the values of `buffer` column:
 
 # YOUR CODE HERE 8 to replace the values in geometry
+geodata['geometry'] = geodata['buffer']
 
 #TEST CODE
 print(geodata.head())
